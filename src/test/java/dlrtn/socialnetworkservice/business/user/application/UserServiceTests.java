@@ -10,6 +10,4 @@ public class UserServiceTests {
     @Autowired
     UserRepository userRepository;
 
-
-
 }
