@@ -3,6 +3,7 @@ package dlrtn.socialnetworkservice.business.user.application;
 import dlrtn.socialnetworkservice.business.user.model.UserType;
 import dlrtn.socialnetworkservice.business.user.model.domain.User;
 import dlrtn.socialnetworkservice.business.user.model.payload.SignUpRequest;
+import dlrtn.socialnetworkservice.business.user.model.payload.SignUpResponse;
 import dlrtn.socialnetworkservice.business.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,11 @@ public class UserService {
 
     UserRepository userRepository;
 
-    public ResponseEntity signUp(SignUpRequest request) {
+    public SignUpResponse signUp(SignUpRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
-            throw new Exception();
-        }LocalDateTime now = LocalDateTime.now();
+            //throw Exception
+        }
+        LocalDateTime now = LocalDateTime.now();
 
         User user = User.builder()
                 .username(request.getUsername())
@@ -32,6 +34,7 @@ public class UserService {
 
         userRepository.save(user);
 
+        return SignUpResponse.success();
     }
 
 }
