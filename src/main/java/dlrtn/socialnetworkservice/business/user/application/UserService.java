@@ -1,13 +1,12 @@
 package dlrtn.socialnetworkservice.business.user.application;
 
-import dlrtn.socialnetworkservice.business.user.model.UserType;
 import dlrtn.socialnetworkservice.business.user.model.domain.User;
 import dlrtn.socialnetworkservice.business.user.model.payload.SignUpRequest;
 import dlrtn.socialnetworkservice.business.user.model.payload.SignUpResponse;
 import dlrtn.socialnetworkservice.business.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -15,19 +14,20 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class UserService {
 
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
+    @Transactional
     public SignUpResponse signUp(SignUpRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
-            //throw Exception
+            //todo throw Exception
         }
+
         LocalDateTime now = LocalDateTime.now();
 
         User user = User.builder()
                 .username(request.getUsername())
                 .password(request.getPassword())
                 .email(request.getEmail())
-                .userType(UserType.USER)
                 .createdAt(now)
                 .updatedAt(now)
                 .build();

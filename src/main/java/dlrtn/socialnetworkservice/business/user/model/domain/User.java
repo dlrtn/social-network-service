@@ -1,39 +1,46 @@
 package dlrtn.socialnetworkservice.business.user.model.domain;
 
 import dlrtn.socialnetworkservice.business.user.model.UserType;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
-import org.springframework.data.annotation.Id;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
-@Builder(toBuilder = true)
-@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
+@Table(name = "USER")
 public class User {
 
     @Id
-    @Column(name = "userId")
-    private final Long id;
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name = "username")
-    private final String username;
+    private String username;
 
-    @Column(name = "password")
-    private final String password;
+    private String password;
 
-    @Column(name = "email")
-    private final String email;
+    private String email;
 
-    @Column(name = "userType")
-    private final UserType userType;
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
 
-    @Column(name = "createdAt")
-    private final LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
-    @Column(name = "updatedAt")
-    private final LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;
+
+    @Builder
+    public User(String username, String password, String email, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.userType = UserType.USER;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
 }
