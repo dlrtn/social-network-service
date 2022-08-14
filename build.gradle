@@ -1,6 +1,7 @@
 plugins {
     id "org.springframework.boot" version "2.7.2"
     id "io.spring.dependency-management" version "1.0.12.RELEASE"
+    id 'nu.studer.jooq' version '6.0.1'
     id "java"
 }
 
@@ -25,16 +26,25 @@ ext {
 dependencies {
     // spring boot starter dependencies
     implementation "org.springframework.boot:spring-boot-starter"
-    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-aop"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-data-redis"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation "org.springframework.boot:spring-boot-starter-jooq"
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
     // general development support library dependencies
     implementation "org.apache.commons:commons-lang3:$commons_lang_version"
     implementation "org.apache.commons:commons-collections4:$commons_collection_version"
     implementation "org.springdoc:springdoc-openapi-ui:$springdoc_openapi_version"
 
-    implementation "mysql:mysql-connector-java"
     implementation "org.mariadb.jdbc:mariadb-java-client:$mariadb_connector_version"
+    jooqGenerator "org.mariadb.jdbc:mariadb-java-client:$mariadb_connector_version"
 
     compileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
@@ -44,6 +54,35 @@ dependencies {
 
     testCompileOnly "org.projectlombok:lombok"
     testAnnotationProcessor "org.projectlombok:lombok"
+}
+
+jooq {
+    configurations {
+        main {
+            generationTool {
+                logging = org.jooq.meta.jaxb.Logging.ERROR
+                jdbc {
+                    driver = 'org.mariadb.jdbc.Driver'
+                    url = 'jdbc:mariadb://13.209.4.83:3306'
+                    user = 'dlrtn'
+                    password = 'jj5514'
+                }
+                generator {
+                    strategy {
+                        name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+                    }
+                    database {
+                        name = 'org.jooq.meta.mariadb.MariaDBDatabase'
+                        includes = 'study_db.*'
+                        excludes = ''
+                    }
+                    target {
+                        packageName = 'com.dlrtn.websocket.chat.business.chat.model.domain.generated'
+                    }
+                }
+            }
+        }
+    }
 }
 
 test {
