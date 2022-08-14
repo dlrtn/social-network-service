@@ -1,10 +1,14 @@
 package dlrtn.socialnetworkservice.business.user.application;
 
 import dlrtn.socialnetworkservice.business.user.exception.AlreadyExistsUserIdException;
+import dlrtn.socialnetworkservice.business.user.exception.UserAuthenticationException;
 import dlrtn.socialnetworkservice.business.user.model.domain.User;
 import dlrtn.socialnetworkservice.business.user.model.payload.*;
 import dlrtn.socialnetworkservice.business.user.repository.UserRepository;
+import dlrtn.socialnetworkservice.config.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +18,8 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class UserService {
 
+    private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
 
     @Transactional
@@ -25,7 +31,7 @@ public class UserService {
 
         User user = User.builder()
                 .username(request.getUsername())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .email(request.getEmail())
                 .createdAt(now)
                 .updatedAt(now)
@@ -36,7 +42,14 @@ public class UserService {
     }
 
     public SignInResponse signIn(SignInRequest request) {
-        return SignInResponse.success();
+        User foundUser = userRepository.findByUsername(request.getUsername());
+        if (ObjectUtils.isEmpty(foundUser) || !passwordEncoder.matches(request.getPassword(), foundUser.getUsername())) {
+            throw new UserAuthenticationException();
+        }
+
+        String jwtToken = jwtTokenProvider.createToken(foundUser.getUsername(), foundUser.getUserType());
+
+        return SignInResponse.success(jwtToken);
     }
 
     public SignOutResponse signOut(SignOutRequest request) {

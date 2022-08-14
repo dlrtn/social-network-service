@@ -11,6 +11,4 @@ public class SignInRequest {
 
     private final String password;
 
-    private final String email;
-
 }

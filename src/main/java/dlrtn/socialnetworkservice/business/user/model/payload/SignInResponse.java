@@ -16,16 +16,18 @@ public class SignInResponse {
 
     private final String description;
 
-    public static SignInResponse success() {
-        return successWith(ResponseMessage.SUCCESS);
+    private final String jwt;
+
+    public static SignInResponse success(String jwt) {
+        return successWith(ResponseMessage.SUCCESS, jwt);
     }
 
     public static SignInResponse failWith(ResponseMessage message) {
-        return of(false, message, message.getDescription());
+        return of(false, message, message.getDescription(), null);
     }
 
-    public static SignInResponse successWith(ResponseMessage message) {
-        return of(true, message, message.getDescription());
+    public static SignInResponse successWith(ResponseMessage message, String jwt) {
+        return of(true, message, message.getDescription(), jwt);
     }
 
 }
