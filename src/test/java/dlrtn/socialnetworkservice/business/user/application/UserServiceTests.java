@@ -1,6 +1,12 @@
 package dlrtn.socialnetworkservice.business.user.application;
 
+import dlrtn.socialnetworkservice.business.user.common.UserTestsConstants;
+import dlrtn.socialnetworkservice.business.user.model.payload.SignUpRequest;
+import dlrtn.socialnetworkservice.business.user.model.payload.SignUpResponse;
 import dlrtn.socialnetworkservice.business.user.repository.UserRepository;
+import dlrtn.socialnetworkservice.common.model.ResponseMessage;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -8,6 +14,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class UserServiceTests {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
+
+    @Test
+    public void UserSignUpTest() {
+        SignUpRequest request = UserTestsConstants.TEST_SIGN_UP_REQUEST;
+
+        SignUpResponse response = userService.signUp(request);
+
+        Assertions.assertEquals(ResponseMessage.SUCCESS, response.getMessage());
+    }
 
 }
