@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class UserApiController {
 
-    UserService userService;
+    private final UserService userService;
 
-    @PostMapping("/signup")
+    @PostMapping("/sign-up")
     public SignUpResponse signUp(@RequestBody SignUpRequest request) {
         return userService.signUp(request);
     }
