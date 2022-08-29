@@ -1,18 +1,16 @@
 package dlrtn.socialnetworkservice.business.user.model.domain;
 
 import dlrtn.socialnetworkservice.business.user.model.UserType;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "USER")
+@Table(name = "User")
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
     @Id
@@ -26,7 +24,6 @@ public class User {
 
     private String email;
 
-    @Enumerated(EnumType.STRING)
     private UserType userType;
 
     private LocalDateTime createdAt;

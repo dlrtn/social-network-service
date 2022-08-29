@@ -5,11 +5,13 @@ import dlrtn.socialnetworkservice.business.user.model.payload.SignUpRequest;
 import dlrtn.socialnetworkservice.business.user.model.payload.SignUpResponse;
 import dlrtn.socialnetworkservice.business.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -19,9 +21,9 @@ public class UserService {
     @Transactional
     public SignUpResponse signUp(SignUpRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
-            //todo throw Exception
+            log.info("User id already exists, user id : " + request.getUsername());
+            return SignUpResponse.failWith("The user id already exists");
         }
-
         LocalDateTime now = LocalDateTime.now();
 
         User user = User.builder()
