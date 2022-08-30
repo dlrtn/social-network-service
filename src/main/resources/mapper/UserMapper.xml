@@ -2,20 +2,16 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dlrtn.socialnetworkservice.business.user.repository.UserRepository">
+<mapper namespace="dlrtn.socialnetworkservice.business.user.mapper.UserMapper">
 
-    <select id="existsByUsername" resultType="dlrtn.socialnetworkservice.business.user.model.domain.User">
-        SELECT  IF(COUNT(*) = 1,1,0)
+    <select id="existsByUsername" resultType="_boolean" parameterType="string">
+        SELECT EXISTS(SELECT *
         FROM USER
         WHERE username = #{username}
+        LIMIT 1)
     </select>
 
-    <select id="selectAllUsers" resultType="Boolean" parameterType="String">
-        SELECT *
-        FROM USER
-    </select>
-
-    <insert id="save" parameterType="dlrtn.socialnetworkservice.business.user.model.domain.User">
+    <insert id="save" parameterType="User">
         INSERT INTO USER (
             USERNAME,
             PASSWORD,

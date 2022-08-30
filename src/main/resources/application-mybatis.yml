@@ -1,2 +1,5 @@
 mybatis:
   mapper-locations: mapper/*.xml
+  type-aliases-package: dlrtn.socialnetworkservice.business.*.model.**
+  configuration:
+    map-underscore-to-camel-case: true
