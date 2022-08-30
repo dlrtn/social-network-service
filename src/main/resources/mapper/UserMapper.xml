@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dlrtn.socialnetworkservice.business.user.repository;">
+<mapper namespace="dlrtn.socialnetworkservice.business.user.repository.UserRepository">
 
     <select id="existsByUsername" resultType="dlrtn.socialnetworkservice.business.user.model.domain.User">
         SELECT  IF(COUNT(*) = 1,1,0)
@@ -15,21 +15,21 @@
         FROM USER
     </select>
 
-    <insert id="insertUser" parameterType="dlrtn.socialnetworkservice.business.user.model.domain.User">
+    <insert id="save" parameterType="dlrtn.socialnetworkservice.business.user.model.domain.User">
         INSERT INTO USER (
-        USERNAME,
-        PASSWORD,
-        EMAIL,
-        USER_TYPE,
-        CREATED_AT,
-        UPDATED_AT)
+            USERNAME,
+            PASSWORD,
+            EMAIL,
+            USER_TYPE,
+            CREATED_AT,
+            UPDATED_AT)
         values (
-        #{username},
-        #{password},
-        #{email},
-        #{userType},
-        #{createdAt},
-        #{updatedAt})
+            #{username},
+            #{password},
+            #{email},
+            #{userType},
+            #{createdAt},
+            #{updatedAt})
     </insert>
 
 </mapper>

@@ -4,6 +4,3 @@ spring:
     username: dlrtn
     password: jj5514
     driver-class-name: org.mariadb.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto = create

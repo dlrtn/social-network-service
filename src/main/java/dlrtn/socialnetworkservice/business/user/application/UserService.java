@@ -33,7 +33,7 @@ public class UserService {
                 .createdAt(now)
                 .updatedAt(now)
                 .build();
-        userRepository.insertUser(user);
+        userRepository.save(user);
 
         return SignUpResponse.success();
     }

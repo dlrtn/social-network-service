@@ -5,8 +5,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository {
-    boolean existsByUsername(String username);
 
-    void insertUser(User user);
+    Boolean existsByUsername(String username);
+
+    void save(User user);
 
 }
