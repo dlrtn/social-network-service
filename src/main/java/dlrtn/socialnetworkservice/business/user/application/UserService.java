@@ -3,7 +3,7 @@ package dlrtn.socialnetworkservice.business.user.application;
 import dlrtn.socialnetworkservice.business.user.model.domain.User;
 import dlrtn.socialnetworkservice.business.user.model.payload.SignUpRequest;
 import dlrtn.socialnetworkservice.business.user.model.payload.SignUpResponse;
-import dlrtn.socialnetworkservice.business.user.repository.UserRepository;
+import dlrtn.socialnetworkservice.business.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,11 +16,11 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Transactional
     public SignUpResponse signUp(SignUpRequest request) {
-        if (userRepository.existsByUsername(request.getUsername())) {
+        if (userMapper.existsByUsername(request.getUsername())) {
             log.info("User id already exists, user id : " + request.getUsername());
             return SignUpResponse.failWith("The user id already exists");
         }
@@ -33,7 +33,7 @@ public class UserService {
                 .createdAt(now)
                 .updatedAt(now)
                 .build();
-        userRepository.save(user);
+        userMapper.save(user);
 
         return SignUpResponse.success();
     }
