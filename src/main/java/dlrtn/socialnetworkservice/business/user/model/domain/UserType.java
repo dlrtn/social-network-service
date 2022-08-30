@@ -1,4 +1,4 @@
-package dlrtn.socialnetworkservice.business.user.model;
+package dlrtn.socialnetworkservice.business.user.model.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
