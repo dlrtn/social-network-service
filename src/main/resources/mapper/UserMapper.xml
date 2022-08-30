@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dlrtn.socialnetworkservice.business.user.repository;">
+
+    <select id="existsByUsername" resultType="dlrtn.socialnetworkservice.business.user.model.domain.User">
+        SELECT  IF(COUNT(*) = 1,1,0)
+        FROM USER
+        WHERE username = #{username}
+    </select>
+
+    <select id="selectAllUsers" resultType="Boolean" parameterType="String">
+        SELECT *
+        FROM USER
+    </select>
+
+    <insert id="insertUser" parameterType="dlrtn.socialnetworkservice.business.user.model.domain.User">
+        INSERT INTO USER (
+        USERNAME,
+        PASSWORD,
+        EMAIL,
+        USER_TYPE,
+        CREATED_AT,
+        UPDATED_AT)
+        values (
+        #{username},
+        #{password},
+        #{email},
+        #{userType},
+        #{createdAt},
+        #{updatedAt})
+    </insert>
+
+</mapper>

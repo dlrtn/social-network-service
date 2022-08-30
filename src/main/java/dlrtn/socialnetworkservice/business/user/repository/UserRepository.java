@@ -1,10 +1,12 @@
 package dlrtn.socialnetworkservice.business.user.repository;
 
 import dlrtn.socialnetworkservice.business.user.model.domain.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends CrudRepository<User, Long> {
-    //todo Repository interface 변경
+@Repository
+public interface UserRepository {
     boolean existsByUsername(String username);
+
+    void insertUser(User user);
 
 }
