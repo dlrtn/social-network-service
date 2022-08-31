@@ -21,7 +21,7 @@ public class UserService {
     @Transactional
     public SignUpResponse signUp(SignUpRequest request) {
         if (userMapper.existsByUsername(request.getUsername())) {
-            log.info("User id already exists, user id : " + request.getUsername());
+            log.error("SignUp request failed : Username already exists, username : " + request.getUsername());
             return SignUpResponse.failWith("The user id already exists");
         }
         LocalDateTime now = LocalDateTime.now();
