@@ -13,6 +13,9 @@ repositories {
 }
 
 ext {
+    // mybatis dependency
+    mybatis_version = "2.2.2"
+
     // general development support library
     commons_collection_version = "4.4"
     commons_lang_version = "3.12.0"
@@ -22,15 +25,17 @@ ext {
 dependencies {
     // spring boot starter dependencies
     implementation "org.springframework.boot:spring-boot-starter"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
     implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatis_version"
 
     // general development support library dependencies
     implementation "org.apache.commons:commons-lang3:$commons_lang_version"
     implementation "org.apache.commons:commons-collections4:$commons_collection_version"
     implementation "org.springdoc:springdoc-openapi-ui:$springdoc_openapi_version"
 
-    implementation "mysql:mysql-connector-java"
+//    implementation "mysql:mysql-connector-java"
+    implementation "org.mariadb.jdbc:mariadb-java-client"
 
     compileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
