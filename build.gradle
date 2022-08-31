@@ -14,13 +14,13 @@ repositories {
 }
 
 ext {
+    // mybatis dependency
+    mybatis_version = "2.2.2"
+
     // general development support library
     commons_collection_version = "4.4"
     commons_lang_version = "3.12.0"
     springdoc_openapi_version = "1.6.6"
-
-    // datasource
-    mariadb_connector_version = "3.0.4"
 }
 
 dependencies {
@@ -43,7 +43,12 @@ dependencies {
     implementation "org.apache.commons:commons-collections4:$commons_collection_version"
     implementation "org.springdoc:springdoc-openapi-ui:$springdoc_openapi_version"
 
-    implementation "org.mariadb.jdbc:mariadb-java-client:$mariadb_connector_version"
+    // related datasource
+    implementation "mysql:mysql-connector-java"
+    implementation "org.mariadb.jdbc:mariadb-java-client"
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatis_version"
+    
+    // for only jooq
     jooqGenerator "org.mariadb.jdbc:mariadb-java-client:$mariadb_connector_version"
 
     compileOnly "org.projectlombok:lombok"
