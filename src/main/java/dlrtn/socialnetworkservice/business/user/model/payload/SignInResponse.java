@@ -1,6 +1,5 @@
 package dlrtn.socialnetworkservice.business.user.model.payload;
 
-import dlrtn.socialnetworkservice.common.model.ResponseMessage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -12,20 +11,18 @@ public class SignInResponse {
 
     private final boolean success;
 
-    private final ResponseMessage message;
-
     private final String description;
 
     public static SignInResponse success() {
-        return successWith(ResponseMessage.SUCCESS);
+        return successWith("User sign in success");
     }
 
-    public static SignInResponse failWith(ResponseMessage message) {
-        return of(false, message, message.getDescription());
+    public static SignInResponse failWith(String description) {
+        return of(false, description);
     }
 
-    public static SignInResponse successWith(ResponseMessage message) {
-        return of(true, message, message.getDescription());
+    public static SignInResponse successWith(String description) {
+        return of(true, description);
     }
 
 }

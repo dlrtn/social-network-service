@@ -20,12 +20,12 @@ public class UserApiController {
         return userService.signUp(request);
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/sign-in")
     public SignInResponse signIn(@RequestBody SignInRequest request) {
         return userService.signIn(request);
     }
 
-    @PostMapping("/signout")
+    @PostMapping("/sign-out")
     public SignOutResponse signOut(@RequestBody SignOutRequest request) {
         return userService.signOut(request);
     }

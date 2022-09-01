@@ -1,6 +1,8 @@
 package dlrtn.socialnetworkservice.business.user.model.domain;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 

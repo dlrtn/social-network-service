@@ -1,12 +1,8 @@
 package dlrtn.socialnetworkservice.business.user.application;
 
-import dlrtn.socialnetworkservice.business.user.exception.AlreadyExistsUserIdException;
+import dlrtn.socialnetworkservice.business.user.mapper.UserMapper;
 import dlrtn.socialnetworkservice.business.user.model.domain.User;
 import dlrtn.socialnetworkservice.business.user.model.payload.*;
-import dlrtn.socialnetworkservice.business.user.repository.UserRepository;
-import dlrtn.socialnetworkservice.business.user.model.payload.SignUpRequest;
-import dlrtn.socialnetworkservice.business.user.model.payload.SignUpResponse;
-import dlrtn.socialnetworkservice.business.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
