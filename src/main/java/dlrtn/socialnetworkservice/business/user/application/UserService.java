@@ -18,10 +18,10 @@ public class UserService {
     private final UserMapper userMapper;
 
     @Transactional
-    public SignUpResponse signUp(SignUpRequest request) {
+    public RegisterResponse signUp(RegisterRequest request) {
         if (userMapper.existsByUsername(request.getUsername())) {
             log.error("SignUp request failed : Username already exists, username : " + request.getUsername());
-            return SignUpResponse.failWith("The user id already exists");
+            return RegisterResponse.failWith("The user id already exists");
         }
         LocalDateTime now = LocalDateTime.now();
 
@@ -34,15 +34,15 @@ public class UserService {
                 .build();
         userMapper.save(user);
 
-        return SignUpResponse.success();
+        return RegisterResponse.success();
     }
 
     public SignInResponse signIn(SignInRequest request) {
         return SignInResponse.success();
     }
 
-    public SignOutResponse signOut(SignOutRequest request) {
-        return SignOutResponse.success();
+    public LogOutResponse logOut(LogOutRequest request) {
+        return LogOutResponse.success();
     }
 
 }

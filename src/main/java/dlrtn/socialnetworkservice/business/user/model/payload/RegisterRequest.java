@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class SignOutRequest {
+public class RegisterRequest {
 
     private final String username;
 

@@ -27,7 +27,6 @@ dependencies {
     // spring boot starter dependencies
     implementation "org.springframework.boot:spring-boot-starter"
     implementation "org.springframework.boot:spring-boot-starter-jdbc"
-    implementation "org.springframework.boot:spring-boot-starter-jooq"
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
     implementation "org.springframework.boot:spring-boot-starter-validation"
@@ -44,9 +43,6 @@ dependencies {
     implementation "mysql:mysql-connector-java"
     implementation "org.mariadb.jdbc:mariadb-java-client"
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatis_version"
-    
-    // for only jooq
-    jooqGenerator "org.mariadb.jdbc:mariadb-java-client"
 
     compileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
@@ -56,35 +52,6 @@ dependencies {
 
     testCompileOnly "org.projectlombok:lombok"
     testAnnotationProcessor "org.projectlombok:lombok"
-}
-
-jooq {
-    configurations {
-        main {
-            generationTool {
-                logging = org.jooq.meta.jaxb.Logging.ERROR
-                jdbc {
-                    driver = 'org.mariadb.jdbc.Driver'
-                    url = 'jdbc:mariadb://13.209.4.83:3306'
-                    user = 'dlrtn'
-                    password = 'jj5514'
-                }
-                generator {
-                    strategy {
-                        name = 'org.jooq.codegen.DefaultGeneratorStrategy'
-                    }
-                    database {
-                        name = 'org.jooq.meta.mariadb.MariaDBDatabase'
-                        includes = 'study_db.*'
-                        excludes = ''
-                    }
-                    target {
-                        packageName = 'com.dlrtn.websocket.chat.business.chat.model.domain.generated'
-                    }
-                }
-            }
-        }
-    }
 }
 
 test {

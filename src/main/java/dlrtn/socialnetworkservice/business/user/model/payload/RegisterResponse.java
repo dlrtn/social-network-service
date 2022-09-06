@@ -7,21 +7,21 @@ import lombok.ToString;
 @Getter
 @AllArgsConstructor(staticName = "of")
 @ToString
-public class SignUpResponse {
+public class RegisterResponse {
 
     private final boolean success;
 
     private final String description;
 
-    public static SignUpResponse success() {
+    public static RegisterResponse success() {
         return successWith("User sign up success");
     }
 
-    public static SignUpResponse failWith(String description) {
+    public static RegisterResponse failWith(String description) {
         return of(false, description);
     }
 
-    public static SignUpResponse successWith(String description) {
+    public static RegisterResponse successWith(String description) {
         return of(true, description);
     }
 
