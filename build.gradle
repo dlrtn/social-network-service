@@ -20,7 +20,7 @@ ext {
     // general development support library
     commons_collection_version = "4.4"
     commons_lang_version = "3.12.0"
-    springdoc_openapi_version = "1.6.6"
+    springdoc_openapi_version = "1.6.11"
 }
 
 dependencies {

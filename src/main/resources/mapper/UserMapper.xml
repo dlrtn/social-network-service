@@ -28,4 +28,10 @@
             #{updatedAt})
     </insert>
 
+    <select id="findByUsername" resultType="User" parameterType="User">
+        SELECT *
+        FROM USER
+        WHERE username = #{username}
+    </select>
+
 </mapper>

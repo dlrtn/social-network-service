@@ -10,4 +10,6 @@ public interface UserMapper {
 
     boolean existsByUsername(String username);
 
+    User findByUsername(String username);
+
 }

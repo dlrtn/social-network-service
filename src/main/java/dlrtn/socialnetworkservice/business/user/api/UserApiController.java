@@ -15,8 +15,8 @@ public class UserApiController {
 
     private final UserService userService;
 
-    @PostMapping("/sign-up")
-    public RegisterResponse signUp(@RequestBody RegisterRequest request) {
+    @PostMapping("/register")
+    public RegisterResponse register(@RequestBody RegisterRequest request) {
         return userService.signUp(request);
     }
 
@@ -25,7 +25,7 @@ public class UserApiController {
         return userService.signIn(request);
     }
 
-    @PostMapping("/sign-out")
+    @PostMapping("/log-out")
     public LogOutResponse logOut(@RequestBody LogOutRequest request) {
         return userService.logOut(request);
     }
