@@ -29,6 +29,9 @@ dependencies {
     // datasource mysql
     implementation 'com.mysql:mysql-connector-j:8.4.0'
 
+    // ssh connect
+    implementation 'com.github.mwiede:jsch:0.2.17'
+
     compileOnly 'org.projectlombok:lombok'
 
     annotationProcessor 'org.projectlombok:lombok'
