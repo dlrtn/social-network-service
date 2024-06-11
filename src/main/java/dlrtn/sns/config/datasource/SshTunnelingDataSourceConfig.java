@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
 /**
@@ -29,14 +28,13 @@ public class SshTunnelingDataSourceConfig {
      * @return 구성된 데이터 소스.
      * @throws JSchException SSH 세션 연결 및 터널링 중 오류가 발생한 경우.
      */
-    @Bean("dataSource")
-    @Primary
+    @Bean()
     public DataSource dataSource(DataSourceProperties properties) throws JSchException {
         initializer.buildSession();
-        Integer forwardedPort = initializer.buildSshTunnel();
+        Integer forwardedPort = initializer.buildTunnel();
 
         String url = properties.getUrl()
-                .replace("[forwardedPort]", Integer.toString(forwardedPort));
+                .replace("[forwardedPort]", forwardedPort.toString());
         log.info("포워딩된 포트가 포함된 데이터베이스 URL: {}", url);
 
         return DataSourceBuilder.create()
