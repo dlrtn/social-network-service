@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Profile;
 @Profile("local")
 @Configuration
 @RequiredArgsConstructor
-public class SshTunnelingDataSourceConfig {
+public class LocalDataSourceConfig {
 
     private final SshTunnelingInitializer initializer;
 
@@ -33,7 +33,7 @@ public class SshTunnelingDataSourceConfig {
     @Primary
     public DataSource dataSource(DataSourceProperties properties) throws JSchException {
         initializer.buildSession();
-        Integer forwardedPort = initializer.buildSshTunnel();
+        Integer forwardedPort = initializer.buildTunneling();
 
         String url = properties.getUrl()
                 .replace("[forwardedPort]", Integer.toString(forwardedPort));

@@ -51,7 +51,7 @@ public class SshTunnelingInitializer {
      * @return 원격 데이터베이스 포트로 포워딩된 로컬 포트.
      * @throws JSchException SSH 세션 설정 또는 터널링 시 오류가 발생한 경우.
      */
-    public Integer buildSshTunnel() throws JSchException {
+    public Integer buildTunneling() throws JSchException {
         try {
             int forwardedPort = session.setPortForwardingL(0, remoteDatabaseHost,
                     remoteDatabasePort);
@@ -59,7 +59,7 @@ public class SshTunnelingInitializer {
             log.info("SSH 터널이 로컬 포트 {}에 설정되었습니다", forwardedPort);
             return forwardedPort;
         } catch (JSchException e) {
-            log.error("SSH 세션 설정 실패", e);
+            log.error("터널링 실패", e);
             this.close();
             throw e;
         }
