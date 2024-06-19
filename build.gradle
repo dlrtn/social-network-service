@@ -1,14 +1,14 @@
 plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.1.11'
-    id 'io.spring.dependency-management' version '1.1.4'
+    id "java"
+    id "org.springframework.boot" version "3.1.11"
+    id "io.spring.dependency-management" version "1.1.4"
 }
 
-group = 'dlrtn'
-version = '0.0.1-SNAPSHOT'
+group = "dlrtn"
+version = "0.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = '17'
+    sourceCompatibility = "17"
 }
 
 configurations {
@@ -21,33 +21,44 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    // database dependencies
+    mysql_connector_version = "8.4.0"
+
+    // ssh connect dependencies
+    jsch_version = "0.2.17"
+
+    // springdoc-openapi-ui dependencies
+    springdoc_openapi_version = "2.5.0"
+}
+
 dependencies {
     // spring boot starter dependencies
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-web"
 
     // datasource mysql
-    implementation 'com.mysql:mysql-connector-j:8.4.0'
+    implementation "com.mysql:mysql-connector-j:$mysql_connector_version"
 
     // ssh connect
-    implementation 'com.github.mwiede:jsch:0.2.17'
+    implementation "com.github.mwiede:jsch:$jsch_version"
 
     // swagger ui
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdoc_openapi_version"
 
-    compileOnly 'org.projectlombok:lombok'
+    compileOnly "org.projectlombok:lombok"
 
-    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok"
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
 
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
 }
 
-tasks.named('bootBuildImage') {
-    builder = 'paketobuildpacks/builder-jammy-base:latest'
+tasks.named("bootBuildImage") {
+    builder = "paketobuildpacks/builder-jammy-base:latest"
 }
 
-tasks.named('test') {
+tasks.named("test") {
     useJUnitPlatform()
 }
