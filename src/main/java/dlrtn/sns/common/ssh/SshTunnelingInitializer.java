@@ -1,4 +1,4 @@
-package dlrtn.sns.config.datasource;
+package dlrtn.sns.common.ssh;
 
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
- * 내부 네트워크에서만 접속 가능한 원격 데이터베이스에 터널링하기 위한 클래스
- * SSH 연결을 위해 JSch를 포크한 mweide를 사용(JSch 라이브러리의 제약사항이 많아 선택)
+ * 내부 네트워크에서만 접속 가능한 원격 데이터베이스에 터널링하기 위한 클래스 SSH 연결을 위해 JSch를 포크한 mweide를 사용(JSch 라이브러리의 제약사항이 많아
+ * 선택)
  */
 @Slf4j
 @Profile("local")

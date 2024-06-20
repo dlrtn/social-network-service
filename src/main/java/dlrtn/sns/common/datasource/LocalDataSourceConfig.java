@@ -1,6 +1,7 @@
-package dlrtn.sns.config.datasource;
+package dlrtn.sns.common.datasource;
 
 import com.jcraft.jsch.JSchException;
+import dlrtn.sns.common.ssh.SshTunnelingInitializer;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
