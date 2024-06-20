@@ -6,8 +6,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.UUID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +21,8 @@ import lombok.NoArgsConstructor;
 public class UserEntity {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(unique = true)
     private String email;
@@ -33,7 +37,6 @@ public class UserEntity {
     private UserRole role;
 
     public UserEntity(User user) {
-        this.id = user.getId();
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.name = user.getName();
@@ -45,12 +48,6 @@ public class UserEntity {
     }
 
     public User toDomain() {
-        return User.builder()
-                .id(id)
-                .email(email)
-                .password(password)
-                .name(name)
-                .role(role)
-                .build();
+        return User.builder().id(id).email(email).password(password).name(name).role(role).build();
     }
 }

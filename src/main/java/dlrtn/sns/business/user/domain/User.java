@@ -1,5 +1,7 @@
 package dlrtn.sns.business.user.domain;
 
+import dlrtn.sns.business.user.domain.request.CreateUserRequest;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +11,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class User {
 
-    private String id;
+    private UUID id;
 
     private String email;
 
@@ -19,5 +21,13 @@ public class User {
 
     private UserRole role;
 
+    public static User fromCreateRequest(CreateUserRequest request) {
+        return User.builder()
+                .email(request.getEmail())
+                .password(request.getPassword())
+                .name(request.getName())
+                .role(UserRole.USER)
+                .build();
+    }
 
 }
