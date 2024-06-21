@@ -23,6 +23,7 @@ public class User {
 
     public static User fromCreateRequest(CreateUserRequest request) {
         return User.builder()
+                .id(UUID.randomUUID())
                 .email(request.getEmail())
                 .password(request.getPassword())
                 .name(request.getName())
