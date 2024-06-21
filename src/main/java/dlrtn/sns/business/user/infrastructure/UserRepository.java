@@ -11,8 +11,12 @@ public class UserRepository {
 
     private final UserJpaRepository userJpaRepository;
 
-    public User saveUser(User user) {
+    public User save(User user) {
         return userJpaRepository.save(UserEntity.from(user)).toDomain();
+    }
+
+    public boolean existsByEmail(String email) {
+        return userJpaRepository.existsByEmail(email);
     }
 
 }

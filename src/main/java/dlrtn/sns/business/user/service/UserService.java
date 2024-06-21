@@ -1,7 +1,7 @@
 package dlrtn.sns.business.user.service;
 
 import dlrtn.sns.business.user.domain.User;
-import dlrtn.sns.business.user.domain.UserRole;
+import dlrtn.sns.business.user.domain.exception.UserAlreadyExistsException;
 import dlrtn.sns.business.user.domain.request.CreateUserRequest;
 import dlrtn.sns.business.user.infrastructure.UserRepository;
 import jakarta.transaction.Transactional;
@@ -15,17 +15,12 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public User save(CreateUserRequest request) {
-        User user = User.builder()
-                .id("1")
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .name(request.getName())
-                .role(UserRole.USER)
-                .build();
+    public User create(CreateUserRequest request) {
+        boolean emailExists = userRepository.existsByEmail(request.getEmail());
+        UserAlreadyExistsException.checkAndThrow(emailExists);
 
-        return userRepository.saveUser(user);
+        User user = User.fromCreateRequest(request);
+        return userRepository.save(user);
     }
-
 
 }
